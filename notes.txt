@@ -1,0 +1,6 @@
+Start > 2021-09-21T11:21:00
+
+Was going to start with 11-Ball but it goes to far forward in a progressive informative. So going to start with a Simon clone called "sequence matcher." 
+
+2021-09-21T11:38:00
+Created the folder and started adding the H/C/J files.
