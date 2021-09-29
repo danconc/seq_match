@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="danConcepcion">
+    <meta name="copyright" content="(c)2021">
+    <link href="../article.css" rel="stylesheet">
+    <link href="./assets/seqmatch.css" rel="stylesheet">
+    <title>Sequence Match Game | poc</title>
+</head>
+<!-- file:///E:/poc/seq_match/seqmatch.html -->
+<body>
+    <main>
+        <h1>Sequence Match Game
+            <span class="byline">danConcepcion</span>
+            <time datetime="2021-09-27">September 27, 2021</time>
+        </h1>
+        <section id="tabgroup">
+            <nav class="tabnav">
+                <ol class="tabs">
+                    <li class="selected">Preamble</li>
+                    <li>TL;DR</li>
+                    <li>User Stories</li>
+                    <li>HTML/User Interface</li>
+                    <li>CSS/The Look</li>
+                    <li>JS/The Function</li>
+                    <li>The Game</li>
+                    <li>Assets</li>
+                    <li>Resources</li>
+
+                    <!-- goto lowercase, strip the '/' and remove space to form the IDs -->
+                </ol>
+            </nav>
+            <article id="preamble">
+                <h2>Preamble</h2>
+                <p>I learned to code as a wee lad, many moons ago. Every once in a while, I get an idea or two of something I'd like to code. Because "Why not?" Sometimes, I don't even know if it can be coded or if it is possible or how it would be coded.</p>
+                
+                <p>Coding requires deep thinking about solving a problem in an inanimate world that connects to this plane of existence. It's good to think about that process. Coding anything is good practice for when you <em>have to code something;</em> especially if you are getting paid to code <em>that</em> something.</p>
+                
+                <p>In this article, I will be using that deep thinking to re-create a game I loved as a child.</p>
+            </article>
+            <article id="tl;dr">
+                <h2>TL;DR</h2>
+                <p>Using the rules of web design, I'm going to create a browser version of Hasboro's famous sequence matching game: <a href="https://www.target.com/p/simon-classic-game/-/A-50693992" target="_blank">Simon</a>. If you are not familiar with the game, it is a circle divided into four, with large  colored buttons: red, green, yellow, and blue. The computer lights one light/button and sounds a tone, then you have to repeat the pattern. After every round another tone/button is added to the sequence.</p>
+
+                <p>And you keep going until you fail. My record is a pattern 79 tones long. Can you beat my all time "high score?" Click to go to <a href="#thegame">the game</a>.</p>
+            </article>
+            <article id="userstories">
+                <h2>User Stories</h2>
+                <p>During the "Discovery" phase of most projects it is essential to create a list of <em>User Stories</em> in an effort to document everything that the user will and expects to be able to do on your web project. It creates a list of functionality that needs to be coded into your project.</p>
+
+                <p>For this project, we have the following <em>User Stories</em>:</p>
+
+                <ol><label>As a user, I want...</label>
+                    <li>to see four buttons just like the classic game;</li>
+                    <li>to have a clear way to start the game;</li>
+                    <li>some indication of what button has been clicked when the computer presses a button; 
+                        <ol>
+                            <li>hear the tone corresponding to a specific button pressed;</li>
+                            <li>make the button light up (go from dark to lighter color;)</li>
+                        </ol>
+                    </li>
+                    <li>some indication when I press a button;
+                        <ol>
+                            <li>hear the tone corresponding to a specific button pressed;</li>
+                            <li>make the button light up (go from dark to lighter color;)</li>
+                        </ol>
+                    </li>
+                    <li>to know if I have played the correct sequence;</li>
+                    <li>to know if I have lost the game;</li>
+                    <li>to be presented with clear way to play the game again;</li>
+                </ol>
+                <h3>Elaboration & Planning</h3>
+                <dl>
+                    <dt>US001</dt>
+                    <dd><p>In the actual game, there are four quarter-pie buttons in a two-column, two-row formation. For this version, the buttons should be layed out in a diamond. There should be one button on a top in the first row, second row has a left and right buttons, and the bottom row should have the last play button.</p>
+                        
+                    <p>While clicking on the play buttons with the mouse would be the main way to interact with the game, this improvised layout matches the keyboard's arrow keys that will act as secondary input to play the game.</p>
+                    
+                    <pre>
+                         Red (up)
+
+               Green (left)    Yellow (right)
+                
+                        Blue (down)
+                    </pre>
+                    </dd>
+                    <dt>US002</dt>
+                    <dd>There should be an obvious button with a label of "New Game". This button should be on an opaque background to prevent touching and activating the game buttons. Programatic measures should also be taken to prevent the play buttons from functioning unless the game is in progress.</dd>
+                    <dt>US003a &amp; US004a</dt>
+                    <dd><p>Whether it's the computer's turn or the users turn, when a button is pressed it should play a tone (1 second)</p>
+                    
+                        <table border="1" cellpadding="2">
+                            <tr>
+                                <thead>Color</thead>
+                                <thead>Tone</thead>
+                            </tr>
+                            <tr>
+                                <td>red</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>green</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>yellow</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>blue</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </dd>
+                    <dt>US003b &amp; US004b</dt>
+                    <dd>Whether it's the computer's turn or the users turn, when a button is pressed it should light up (get brighter) and play a tone (1 second) </dd>
+                </dl>
+            </article>
+            <article id="thegame">
+                <div id="seqmatch">
+                    <div class="row">
+                        <button id="redBtn" class="gameBtn">r</button>
+                        <button id="greenBtn" class="gameBtn">g</button>
+                    </div>
+                    <div class="row">
+                        <button id="yellowBtn" class="gameBtn">y</button>
+                        <button id="blueBtn" class="gameBtn">b</button>                        
+                    </div>
+                    <div id="startDialog" class="popup">
+                        <p id="gameMsg">Would you like to try again?</p>
+                        <button id="startBtn" class="control">New Game</button>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h2>Assets</h2>
+                <p>Listed here are the resources you would need to play this game.</p>
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </article>
+            <article>
+                <h2>Resources</h2>
+                <ul>
+                    <li>Get the tone frequencies: <a target="_blank" href="https://www.gieson.com/Library/projects/utilities/tonegen/">www.gieson.com</a></li>
+                    <li>To save the notes: <a target="_blank" href="https://onlinetonegenerator.com/">onlinetonegenerator.com</a></li>
+                </ul>
+            </article>
+        </section>
+    </main>
+    <script src="../helpers.js"></script>
+    <script src="../article.js"></script>
+    <script src="./assets/seqmatch.js"></script>
+    <script src="assets/main.js"></script>   
+</body>
+</html>
