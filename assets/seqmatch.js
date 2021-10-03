@@ -13,17 +13,32 @@ audio.play();
 
 var seqm = {
     color: '',
-    playTone : function() {},
+    toneSeq: [],
+    getNumber: function (id) {
+        switch (id) {
+            case 'redBtn' : return 1;
+            case 'yellowBtn' : return 2;
+            case 'greenBtn' : return 3;
+            case 'blueBtn' : return 4;
+        }
+    },
     btnClick: function () { //alert('click');
         var btn = $(this),
+            id = btn.attr('id'),
+            val = seqm.getNumber(id),
+            audio = document.getElementById('audio' + val),
             tmp = null;
 
-        console.log(btn.attr('id'));
+        console.log(id, val);
 
-        btn.addClass('clicked');
-        tmp = setTimeout(function(){
-            btn.removeClass('clicked');
-        }, 250);
+        btn.addClass('clicked');        
+
+        // tmp = setTimeout(function(){
+        //     btn.removeClass('clicked');            
+        // }, 125);
+
+        audio.play().then(function() { btn.removeClass('clicked'); });
+        clearTimeout(tmp);
     },
     loadHandlers: function () {
         $('#buttonGrp').find('button').on('click', seqm.btnClick);

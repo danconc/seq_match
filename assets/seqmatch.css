@@ -25,14 +25,14 @@
       width: 100px;
     }
 
-    #buttonGrp #redBtn, #buttonGrp #redBtn:hover { background: #800000; transition: background .5s; } 
-    #buttonGrp #greenBtn, #buttonGrp #greenBtn:hover { background: #008000; transition: background .5s; }
-    #buttonGrp #yellowBtn, #buttonGrp #yellowBtn:hover { background: #DAA520; transition: background .5s; } 
-    #buttonGrp #blueBtn, #buttonGrp #blueBtn:hover { background: #0000FF; transition: background .5s; }
-      #buttonGrp #redBtn.clicked { background: #FF0000; transition: background .5s; } 
-      #buttonGrp #greenBtn.clicked { background: #00FF00; transition: background .5s; }
-      #buttonGrp #yellowBtn.clicked { background: #FFFF00; transition: background .5s; } 
-      #buttonGrp #blueBtn.clicked { background: #00BFFF; transition: background .5s; }
+    #buttonGrp #redBtn { background: #800000; transition: background .5s; } 
+    #buttonGrp #greenBtn { background: #008000; transition: background .5s; }
+    #buttonGrp #yellowBtn { background: #DAA520; transition: background .5s; } 
+    #buttonGrp #blueBtn { background: #0000FF; transition: background .5s; }
+      #buttonGrp #redBtn:hover { background: #FF0000; transition: background .5s; } 
+      #buttonGrp #greenBtn:hover { background: #00FF00; transition: background .5s; }
+      #buttonGrp #yellowBtn:hover { background: #FFFF00; transition: background .5s; } 
+      #buttonGrp #blueBtn:hover { background: #00BFFF; transition: background .5s; }
 
 #counterBox {
   color: gray;
