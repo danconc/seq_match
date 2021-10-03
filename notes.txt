@@ -7,3 +7,7 @@ Created the folder and started adding the H/C/J files.
 
 2021-09-27t16:14:00
 con't
+
+2021-10/01T14:49:18
+- The final code needs #dialog to have a class 'open'
+- the final code needs #questionBtn to have a class of 'open'

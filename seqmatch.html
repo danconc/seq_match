@@ -68,6 +68,7 @@
                             <li>make the button light up (go from dark to lighter color;)</li>
                         </ol>
                     </li>
+                    <li>to know the number of tones in the sequence for every round</li>
                     <li>to know if I have played the correct sequence;</li>
                     <li>to know if I have lost the game;</li>
                     <li>to be presented with clear way to play the game again;</li>
@@ -89,49 +90,181 @@
                     </dd>
                     <dt>US002</dt>
                     <dd>There should be an obvious button with a label of "New Game". This button should be on an opaque background to prevent touching and activating the game buttons. Programatic measures should also be taken to prevent the play buttons from functioning unless the game is in progress.</dd>
+
                     <dt>US003a &amp; US004a</dt>
-                    <dd><p>Whether it's the computer's turn or the users turn, when a button is pressed it should play a tone (1 second)</p>
+                    <dd><p>Whether it's the computer's turn or the users turn, when a button is pressed it should play a tone (1 second), see table for tone values.</p>
                     
-                        <table border="1" cellpadding="2">
-                            <tr>
-                                <thead>Color</thead>
-                                <thead>Tone</thead>
-                            </tr>
+                        <table id="toneChart">
+                            <thead>
+                                <tr>
+                                    <th>Color</th>
+                                    <th>Tone (hz)</th>
+                                    <th>Note</th>
+                                </tr>
+                            </thead>
                             <tr>
                                 <td>red</td>
-                                <td></td>
+                                <td>130.81</td>
+                                <td>C</td>
                             </tr>
                             <tr>
                                 <td>green</td>
-                                <td></td>
+                                <td>146.83</td>
+                                <td>D</td>
                             </tr>
                             <tr>
                                 <td>yellow</td>
-                                <td></td>
+                                <td>164.81</td>
+                                <td>E</td>
                             </tr>
                             <tr>
                                 <td>blue</td>
-                                <td></td>
+                                <td>174.61</td>
+                                <td>F</td>
                             </tr>
                         </table>
                     </dd>
+
                     <dt>US003b &amp; US004b</dt>
-                    <dd>Whether it's the computer's turn or the users turn, when a button is pressed it should light up (get brighter) and play a tone (1 second) </dd>
+                    <dd>
+                        <p>Whether it's the computer's turn or the users turn, when a button is pressed it should light up (get brighter). This should be accomplished by setting the colors of the button a darker shade when in not clicked and a lighter color when clicked. The table below lists the RGB values (in hex) for the buttons.</p>
+
+                        <table>
+                            <tr>
+                                <th>Button</th>
+                                <th>Normal Color</th>
+                                <th>Clicked Color</th>
+                            </tr>
+                            <tr>
+                                <td>Red</td>
+                                <td style="background:#FF0000; color:#fff;">#FF0000</td>
+                                <td style="background:#800000; color:#fff;">#800000</td>
+                            </tr>
+                            <tr>
+                                <td>Green</td>
+                                <td style="background:#00ff00;">#00FF00</td>
+                                <td style="background:#008000; color:#fff;">#008000</td>
+                            </tr>
+                            <tr>
+                                <td>Yellow</td>
+                                <td style="background:#FFFF00;">#FFFF00</td>
+                                <td style="background:#DAA520; color:#fff;">#DAA520</td>
+                            </tr>
+                            <tr>
+                                <td>Blue</td>
+                                <td style="background:#00BFFF;">#00BFFF</td>
+                                <td style="background:#0000FF; color:#fff;">#0000FF</td>
+                            </tr>
+                        </table>
+                    </dd>
+                    <dt>US005</dt>
+                    <dd>
+                        <p>There should be a counter that tells the player how many tones the current pattern has. As the player presses buttons to match the current sequence of tones, this counter should count down. This counter should not be visible when it reaches zero (0).</p>
+                    </dd>
+                    <dt>US006</dt>
+                    <dd>
+                        <p>On the Simon game console, when the player has entered the sequence correctly there is no feedback, instead the game just goes to the next round of tones (after adding a new tone to the end of the sequence.)</p>
+
+                        <p>For this version, an encouraging phrase should appear for 3 seconds and then disappear. The phrase will be randomly selected from the following list:</p>
+
+                        <ul>
+                            <li>Good</li>
+                            <li>Great</li>
+                            <li>Awesome</li>
+                            <li>Excellent</li>
+                            <li>Terrific</li>
+                            <li>Wonderful</li>
+                            <li>Wow</li>
+                            <li>Super</li>
+                            <li>You got it</li>
+                        </ul>
+                    </dd>
+                    <dt>US007</dt>
+                    <dd>Once a button is pressed and it doesn't match the sequence, a tone (150hz) will sound announcing failure and that the game has ended.</dd>
+                    <dt>US008</dt>
+                    <dd>After the failure tone sounds a dialog will popup asking if the player wants to play again. Under the question, the new game button will appear.</dd>
                 </dl>
             </article>
+            <article>
+                <h2>HTML/User Interface</h2>
+
+                <p>The user interface will have four square, colored buttons that will form a diamond. In order to make the game mobile-friendly, the buttons should not be bigger than 100px<sup>2</sup> or height and width of 100px.</p>
+
+                <p>The HTML for the main part of the game will be a button group with two paragraphs containing two buttons each. Each button should contain a class to identify its color.</p>
+
+                <p class="note">The <tt>p</tt> tag is used to since it is a block element and works as a child element to the parent <tt>div</tt> tag.</p>
+
+<code>
+<pre>
+<tt>div id="buttonGrp"</tt>
+    <tt>p</tt>
+        <tt>button class="redBtn"</tt><tt>/button</tt>
+        <tt>button class="greenBtn"</tt><tt>/button</tt>
+    <tt>/p</tt>
+    <tt>p</tt>
+        <tt>button class="yellowBtn"</tt><tt>/button</tt>
+        <tt>button class="blueBtn"</tt><tt>/button</tt>
+    <tt>/p</tt>
+<tt>/div</tt>
+</pre></code>
+
+                <h3>US002</h3>
+
+                <p>This story calls for a button with a label of "New Game". This button is the same as needed for US008 so it will be repurposed.</p>
+
+                <h3>US005</h3>
+
+                <p>This story calls for a counter to show the total number of tones in the sequence. This will consist of a parent <tt>div</tt>, a label and <tt>span</tt> which will hold the actual value. It should be positioned on the left of the game buttons. The <tt>span</tt> should have an ID so that it can be reached and manipulated via javascript.</p>
+
+<code>
+<pre>
+<tt>div id="counterBox"</tt>
+    <tt>label for="toneCounter"</tt>Tones<tt>/label</tt>
+    <tt>span id="toneCounter"</tt>0<tt>/span</tt>
+<tt>/div</tt>
+</pre>
+</code>
+
+                <h3>US006</h3>
+
+                <p>This story calls for a message giving feedback to the player. A simple div tag with the ID of 'feedback' will be used to accomplish this. Javascript will be used to change the text as needed.</p>
+
+<code>
+    <pre>
+<tt>div id="feedback"</tt>Excellent!<tt>/div</tt>
+    </pre>
+</code>
+            </article>
+            <article>
+                <h2>CSS/The Look</h2>
+                <p></p>
+            </article>
+            <article>
+                <h2>JS/The Function</h2>
+                <p></p>
+            </article>
             <article id="thegame">
-                <div id="seqmatch">
-                    <div class="row">
-                        <button id="redBtn" class="gameBtn">r</button>
-                        <button id="greenBtn" class="gameBtn">g</button>
+                <h2>Sequence Match Game</h2>
+
+                <div id="gameBox">
+                    <div id="counterBox">
+                        <label for="toneCounter">Tones Left: </label>
+                        <span id="toneCounter">0</span>
                     </div>
-                    <div class="row">
-                        <button id="yellowBtn" class="gameBtn">y</button>
-                        <button id="blueBtn" class="gameBtn">b</button>                        
+                    <div id="seqmatch">
+                        <div id="buttonGrp">
+                            <p>
+                                <button id="redBtn"></button><button id="greenBtn"></button>
+                            </p>
+                            <p>
+                                <button id="yellowBtn"></button><button id="blueBtn"></button>
+                            </p>
+                        </div>
                     </div>
-                    <div id="startDialog" class="popup">
-                        <p id="gameMsg">Would you like to try again?</p>
-                        <button id="startBtn" class="control">New Game</button>
+                    <div id="feedback">Excellent!</div>
+                    <div id="dialog" ><!-- class="open" -->
+                        <p id="question">Do you want to play again?</p><!-- class="show" -->
+                        <p><button id="newGameBtn" class="show">New Game</button></p>
                     </div>
                 </div>
             </article>
@@ -151,13 +284,16 @@
                 <ul>
                     <li>Get the tone frequencies: <a target="_blank" href="https://www.gieson.com/Library/projects/utilities/tonegen/">www.gieson.com</a></li>
                     <li>To save the notes: <a target="_blank" href="https://onlinetonegenerator.com/">onlinetonegenerator.com</a></li>
+                    <li><a target="_blank" href="https://www.rapidtables.com/web/color/color-wheel.html">color wheel</a></li>
+                    <li><a target="_blank" href="https://www.w3schools.com/css/css3_2dtransforms.asp">CSS3 Transform</a></li>
+                    <li><a target="_blank" href="https://www.w3schools.com/css/css3_transitions.asp">CSS3 Transitions</a></li>
                 </ul>
             </article>
         </section>
     </main>
-    <script src="../helpers.js"></script>
+    <script src="./assets/jquery.min.js"></script>
     <script src="../article.js"></script>
     <script src="./assets/seqmatch.js"></script>
-    <script src="assets/main.js"></script>   
+    <script src="./assets/main.js"></script>   
 </body>
 </html>
