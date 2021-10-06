@@ -30,11 +30,12 @@ var seqm = {
         }
         
         audio.play();
+        $('#buttonGrp').find('button').addClass('on');
     },
     btnClick: function () { //alert('click');
         var btn = $(this),
             id = btn.attr('id'),
-            val = seqm.getNumber(id);
+            val = seqm.getNumber(id);   
 
         seqm.playTone(val);    
     },
@@ -54,6 +55,7 @@ var seqm = {
             seqm.idx = 0;
             clearInterval(seqm.intv);
         } else { console.log(val);
+            //$('#buttonGrp').find('button').eq(val -1).addClass('on');
             seqm.playTone(val);
             seqm.idx++;
         }
