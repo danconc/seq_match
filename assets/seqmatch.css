@@ -29,10 +29,14 @@
     #buttonGrp #greenBtn { background: #008000; transition: background .5s; }
     #buttonGrp #yellowBtn { background: #DAA520; transition: background .5s; } 
     #buttonGrp #blueBtn { background: #0000FF; transition: background .5s; }
-      #buttonGrp #redBtn:hover { background: #FF0000; transition: background .5s; } 
-      #buttonGrp #greenBtn:hover { background: #00FF00; transition: background .5s; }
-      #buttonGrp #yellowBtn:hover { background: #FFFF00; transition: background .5s; } 
-      #buttonGrp #blueBtn:hover { background: #00BFFF; transition: background .5s; }
+      #buttonGrp #redBtn:hover,
+        #buttonGrp #redBtn.on { background: #FF0000; transition: background .5s; } 
+      #buttonGrp #greenBtn:hover,
+        #buttonGrp #greenBtn.on { background: #00FF00; transition: background .5s; }
+      #buttonGrp #yellowBtn:hover,
+        #buttonGrp #yellowBtn.on { background: #FFFF00; transition: background .5s; } 
+      #buttonGrp #blueBtn:hover,
+        #buttonGrp #blueBtn.on { background: #00BFFF; transition: background .5s; }
 
 #counterBox {
   color: gray;

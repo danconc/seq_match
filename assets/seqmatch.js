@@ -12,7 +12,7 @@ audio.play();
 */
 
 var seqm = {
-    color: '',
+    computer: true,
     toneSeq: [],
     getNumber: function (id) {
         switch (id) {
@@ -22,26 +22,50 @@ var seqm = {
             case 'blueBtn' : return 4;
         }
     },
+    playTone: function(note) {
+        var audio = document.getElementById('audio' + note);
+        
+        if(audio === null) {
+            clearInterval(seqm.intv);
+        }
+        
+        audio.play();
+    },
     btnClick: function () { //alert('click');
         var btn = $(this),
             id = btn.attr('id'),
-            val = seqm.getNumber(id),
-            audio = document.getElementById('audio' + val),
-            tmp = null;
+            val = seqm.getNumber(id);
 
-        console.log(id, val);
+        seqm.playTone(val);    
+    },
+    AddRndInt: function() {
+        var min = 1,
+            max = 5;
 
-        btn.addClass('clicked');        
+        seqm.toneSeq.push(Math.floor((Math.random() * (max - min)) + min));
+        console.log('AddRndInt: ' + seqm.toneSeq);
+    },
+    idx: 0,
+    intv: null,
+    computerClick: function() {
+        var val = seqm.toneSeq[seqm.idx];
 
-        // tmp = setTimeout(function(){
-        //     btn.removeClass('clicked');            
-        // }, 125);
+        if(val === undefined) {
+            seqm.idx = 0;
+            clearInterval(seqm.intv);
+        } else { console.log(val);
+            seqm.playTone(val);
+            seqm.idx++;
+        }
+    },
+    computerGoes: function () { console.log('Computer\'s Turn!');
+        seqm.AddRndInt();
 
-        audio.play().then(function() { btn.removeClass('clicked'); });
-        clearTimeout(tmp);
+        seqm.intv = setInterval(seqm.computerClick, 1250);
     },
     loadHandlers: function () {
         $('#buttonGrp').find('button').on('click', seqm.btnClick);
+        $('#computerBtn').on('click', seqm.computerGoes);
     },
     init: function () { //alert('Ready Player One...');
         seqm.loadHandlers();
