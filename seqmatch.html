@@ -188,23 +188,17 @@
             <article>
                 <h2>HTML/User Interface</h2>
 
-                <p>The user interface will have four square, colored buttons that will form a diamond. In order to make the game mobile-friendly, the buttons should not be bigger than 100px<sup>2</sup> or height and width of 100px.</p>
+                <p>The user interface will have four square, colored buttons that will form a diamond. In order to make the game mobile-friendly, the buttons should not be bigger than height and width of 100px.</p>
 
                 <p>The HTML for the main part of the game will be a button group with two paragraphs containing two buttons each. Each button should contain a class to identify its color.</p>
-
-                <p class="note">The <tt>p</tt> tag is used to since it is a block element and works as a child element to the parent <tt>div</tt> tag.</p>
 
 <code>
 <pre>
 <tt>div id="buttonGrp"</tt>
-    <tt>p</tt>
-        <tt>button class="redBtn"</tt><tt>/button</tt>
-        <tt>button class="greenBtn"</tt><tt>/button</tt>
-    <tt>/p</tt>
-    <tt>p</tt>
-        <tt>button class="yellowBtn"</tt><tt>/button</tt>
-        <tt>button class="blueBtn"</tt><tt>/button</tt>
-    <tt>/p</tt>
+    <tt>button class="redBtn"</tt><tt>/button</tt>
+    <tt>button class="greenBtn"</tt><tt>/button</tt>
+    <tt>button class="yellowBtn"</tt><tt>/button</tt>
+    <tt>button class="blueBtn"</tt><tt>/button</tt>
 <tt>/div</tt>
 </pre></code>
 
@@ -253,12 +247,10 @@
                     </div><!-- end#counterBox -->
                     <div id="seqmatch">
                         <div id="buttonGrp">
-                            <p>
-                                <button id="redBtn"></button><button id="greenBtn"></button>
-                            </p>
-                            <p>
-                                <button id="yellowBtn"></button><button id="blueBtn"></button>
-                            </p>
+                            <button id="redBtn"></button>
+                            <button id="greenBtn"></button>
+                            <button id="yellowBtn"></button>
+                            <button id="blueBtn"></button>
                         </div><!-- end#buttonGrp-->
                     </div>
                     <div id="feedback">Excellent!</div><!-- end#feedback-->
