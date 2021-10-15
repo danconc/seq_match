@@ -1,5 +1,5 @@
 /*********************************
- * fn: seqmatch.css
+ * fn: seqmatch.js
  * by: danConcepion
  * dt: 2021-09-29T16:46:05
  * pn: Sequence Match Game
@@ -12,8 +12,8 @@ audio.play();
 */
 
 var seqm = {
-    computer: true,
     toneSeq: [],
+    curBtn : '',
     getNumber: function (id) {
         switch (id) {
             case 'redBtn' : return 1;
@@ -21,6 +21,9 @@ var seqm = {
             case 'greenBtn' : return 3;
             case 'blueBtn' : return 4;
         }
+    },
+    turnOff : function() {
+        $(seqm.curBtn).removeClass('on');
     },
     playTone: function(note) {
         var audio = document.getElementById('audio' + note);
@@ -30,40 +33,31 @@ var seqm = {
         }
         
         audio.play();
-        $('#buttonGrp').find('button').addClass('on');
     },
-    btnClick: function () { //alert('click');
+    btnClick : function() {
         var btn = $(this),
             id = btn.attr('id'),
-            val = seqm.getNumber(id);   
+            num = seqm.getNumber(id),
+            intv = null;
 
-        seqm.playTone(val);    
+        seqm.curBtn = '#' + id;        
+        seqm.intv = setInterval(seqm.turnOff, 1000);
+        seqm.playTone(num);
+
+        btn.addClass('on');
+        console.log(id, num, seqm.curBtn);
     },
     AddRndInt: function() {
         var min = 1,
             max = 5;
-
+    
         seqm.toneSeq.push(Math.floor((Math.random() * (max - min)) + min));
         console.log('AddRndInt: ' + seqm.toneSeq);
     },
-    idx: 0,
-    intv: null,
-    computerClick: function() {
-        var val = seqm.toneSeq[seqm.idx];
+    computerGoes : function() {
 
-        if(val === undefined) {
-            seqm.idx = 0;
-            clearInterval(seqm.intv);
-        } else { console.log(val);
-            //$('#buttonGrp').find('button').eq(val -1).addClass('on');
-            seqm.playTone(val);
-            seqm.idx++;
-        }
-    },
-    computerGoes: function () { console.log('Computer\'s Turn!');
         seqm.AddRndInt();
-
-        seqm.intv = setInterval(seqm.computerClick, 1250);
+        $('#redBtn').addClass('on').trigger('click');
     },
     loadHandlers: function () {
         $('#buttonGrp').find('button').on('click', seqm.btnClick);
