@@ -12,8 +12,10 @@ audio.play();
 */
 
 var seqm = {
+    i: 0,
+    len: 0,
     toneSeq: [],
-    curBtn : '',
+    curBtn: '',
     getNumber: function (id) {
         switch (id) {
             case 'redBtn' : return 1;
@@ -22,26 +24,32 @@ var seqm = {
             case 'blueBtn' : return 4;
         }
     },
-    turnOff : function() {
-        $(seqm.curBtn).removeClass('on');
-    },
-    playTone: function(note) {
-        var audio = document.getElementById('audio' + note);
-        
-        if(audio === null) {
-            clearInterval(seqm.intv);
+    getId: function (idx) {
+        switch (idx) {
+            case 1: return '#redBtn';
+            case 2: return '#yellowBtn';
+            case 3: return '#greenBtn';
+            case 4: return '#blueBtn';
         }
-        
+    },
+    turnOff: function () {
+        $(seqm.curBtn).removeClass('on');
+        clearInterval(seqm.intv);
+    },
+    playTone: function (note) {
+        var audio = document.getElementById('audio' + note);
+
+        if (audio === null) { clearInterval(seqm.intv); }
+
         audio.play();
     },
-    btnClick : function() {
+    btnClick: function () {
         var btn = $(this),
             id = btn.attr('id'),
-            num = seqm.getNumber(id),
-            intv = null;
+            num = seqm.getNumber(id);
 
         seqm.curBtn = '#' + id;        
-        seqm.intv = setInterval(seqm.turnOff, 1000);
+        seqm.intv = setInterval(seqm.turnOff, 1400);
         seqm.playTone(num);
 
         btn.addClass('on');
@@ -50,14 +58,34 @@ var seqm = {
     AddRndInt: function() {
         var min = 1,
             max = 5;
-    
-        seqm.toneSeq.push(Math.floor((Math.random() * (max - min)) + min));
-        console.log('AddRndInt: ' + seqm.toneSeq);
-    },
-    computerGoes : function() {
 
-        seqm.AddRndInt();
-        $('#redBtn').addClass('on').trigger('click');
+        seqm.toneSeq.push(seqm.getId(Math.floor((Math.random() * (max - min)) + min)));
+
+        console.log('AddRndInt: ' + seqm.toneSeq);
+        return seqm.toneSeq.length;
+    },
+    callButton: function() {
+        var btnId = seqm.toneSeq[seqm.i];
+
+        $(btnId).addClass('on').trigger('click');
+        seqm.i += 1;
+    },
+    computerGoes: function() {
+        if (seqm.len === 0) {
+            seqm.len = seqm.AddRndInt();
+            $('#toneCounter').html(seqm.len);
+        }          
+
+        console.log('len: ' + seqm.len);
+        
+        seqm.callButton();
+
+        if(seqm.i < seqm.len) {
+            setTimeout(seqm.computerGoes, 1500); 
+        } else {
+            seqm.i = 0;
+            seqm.len = 0;
+        }
     },
     loadHandlers: function () {
         $('#buttonGrp').find('button').on('click', seqm.btnClick);
