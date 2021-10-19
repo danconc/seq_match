@@ -19,6 +19,7 @@
     #buttonGrp p { margin: 0; }
     #buttonGrp button {
       border: 1px solid black;
+      border-radius: 8px;
       cursor: pointer;
       height: 100px;
       margin: 5px;
@@ -37,6 +38,14 @@
         #buttonGrp #yellowBtn.on { background: #FFFF00; transition: background .5s; } 
       #buttonGrp #blueBtn:hover,
         #buttonGrp #blueBtn.on { background: #00BFFF; transition: background .5s; }
+        #buttonGrp #redBtn:hover,
+        #buttonGrp #redBtn.on, 
+      #buttonGrp #greenBtn:hover,
+        #buttonGrp #greenBtn.on,
+      #buttonGrp #yellowBtn:hover,
+        #buttonGrp #yellowBtn.on, 
+      #buttonGrp #blueBtn:hover,
+        #buttonGrp #blueBtn.on { border-left:3px solid white; border-top:3px solid white; }
 
 #counterBox {
   color: gray;
