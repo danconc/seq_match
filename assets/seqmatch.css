@@ -90,14 +90,13 @@
 #newGameBtn {
   border: 1px solid #363042;
   color: #363042;
-  display: none;
+  display: block;
   cursor: pointer;
   font-size: 24px;
   font-weight: bold;
   margin: 0 auto;
   padding: 8px 16px;
 }
-  #newGameBtn.show { display: block; }
 
 #feedback {
   color: white;
