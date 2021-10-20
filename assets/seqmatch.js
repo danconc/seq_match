@@ -16,6 +16,8 @@ var seqm = {
     len: 0,
     toneSeq: [],
     curBtn: '',
+    computerTurn: null,
+    endGame: null,
     getNumber: function (id) {
         switch (id) {
             case 'redBtn' : return 1;
@@ -87,25 +89,49 @@ var seqm = {
             seqm.len = 0;
         }
     },
+    endTheGame: function() {
+        $('#dialog').addClass('open');
+        $('#question').addClass('show');
+    },
+    gameLoop: function() {
+        if(!seqm.endGame) {
+            if (seqm.computerTurn) {
+                seqm.computerGoes();
+                seqm.computerTurn = false;
+            }
+        } else {
+            seqm.endTheGame();
+        }
+    },
+    resetGame: function () {
+        seqm.i = 0;
+        seqm.len = 0;
+        seqm.toneSeq.length = 0;
+        seqm.curBtn = '';
+        seqm.computerTurn = true;
+        seqm.endGame = false;
+    },
+    startGame: function () { //alert('Ready Player One...');
+        seqm.resetGame();
+        $('#dialog').removeClass('open');
+        $('#feedback').html('Get Ready!').addClass('show');
+        
+        var tmp = setInterval(() => {
+            $('#feedback').removeClass('show');
+            clearInterval(tmp);
+            seqm.gameLoop();
+        }, 3200);
+    },
     loadHandlers: function () {
         $('#buttonGrp').find('button').on('click', seqm.btnClick);
         $('#computerBtn').on('click', seqm.computerGoes);
+        $('#newGameBtn').on('click', seqm.startGame);
     },
     init: function () { //alert('Ready Player One...');
         seqm.loadHandlers();
     }
 };
 
-$(function () {
-    //alert('Ready player one...');
+$(function () { //alert('Ready player one...');
     seqm.init();
 });
-
-/*
-document.addEventListener("DOMContentLoaded", function(event) 
-{
-	//document is fully loaded 
-})
-
-https://www.w3schools.com/jsref/met_win_settimeout.asp
-*/
