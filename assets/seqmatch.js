@@ -45,6 +45,7 @@ var seqm = {
 
         audio.play();
     },
+    playerIdx: 0,
     btnClick: function () {
         var btn = $(this),
             id = btn.attr('id'),
@@ -55,7 +56,6 @@ var seqm = {
         seqm.playTone(num);
 
         btn.addClass('on');
-        console.log(id, num, seqm.curBtn);
     },
     AddRndInt: function() {
         var min = 1,
@@ -63,7 +63,6 @@ var seqm = {
 
         seqm.toneSeq.push(seqm.getId(Math.floor((Math.random() * (max - min)) + min)));
 
-        console.log('AddRndInt: ' + seqm.toneSeq);
         return seqm.toneSeq.length;
     },
     callButton: function() {
@@ -76,10 +75,8 @@ var seqm = {
         if (seqm.len === 0) {
             seqm.len = seqm.AddRndInt();
             $('#toneCounter').html(seqm.len);
-        }          
+        }
 
-        console.log('len: ' + seqm.len);
-        
         seqm.callButton();
 
         if(seqm.i < seqm.len) {
@@ -111,16 +108,24 @@ var seqm = {
         seqm.computerTurn = true;
         seqm.endGame = false;
     },
-    startGame: function () { //alert('Ready Player One...');
-        seqm.resetGame();
+    openDialog: function (msg) {
         $('#dialog').removeClass('open');
-        $('#feedback').html('Get Ready!').addClass('show');
-        
+        $('#feedback').html(msg).addClass('show');
+
         var tmp = setInterval(() => {
             $('#feedback').removeClass('show');
             clearInterval(tmp);
+        }, 3000);
+
+    },
+    startGame: function () { //alert('Ready Player One...');
+        seqm.resetGame();
+        seqm.openDialog('Get Ready!');
+        
+        var tmp = setInterval(() => {
+            clearInterval(tmp);
             seqm.gameLoop();
-        }, 3200);
+        }, 2000);
     },
     loadHandlers: function () {
         $('#buttonGrp').find('button').on('click', seqm.btnClick);
