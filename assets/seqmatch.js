@@ -46,6 +46,42 @@ var seqm = {
         audio.play();
     },
     playerIdx: 0,
+    soundError: function () {
+        var audio = document.getElementById('errorSnd');
+        audio.play();
+        var tmp = setInterval(function () {
+            audio.pause();
+            seqm.endTheGame();
+        }, 3000);
+    },
+    checkPlayerInput: function (id) {
+        var len = seqm.toneSeq.length - 1,
+            idx = seqm.playerIdx,
+            match = (id === seqm.toneSeq[idx]),
+            $ctr = $('#toneCounter'),
+            cnt = parseInt($ctr.html()) - 1;
+
+        $ctr.html(cnt);
+
+        console.log('len: ' + len + ', idx: ' + idx);
+        console.log('id: ' + id + ', toneSeq[]: ' + seqm.toneSeq[idx] + '\n>>MATCH? ' + match + '\nCnt:' + cnt);
+
+        if(!match) {
+            seqm.computerTurn = false;
+            seqm.endGame = true;
+            seqm.soundError();
+        }
+
+        if(cnt === 0) {
+            seqm.computerTurn = true;
+            var tmp = setInterval(function() {
+                clearInterval(tmp);
+                seqm.computerGoes();            
+            }, 3000);
+        } else {
+            seqm.playerIdx += 1;
+        }
+    },
     btnClick: function () {
         var btn = $(this),
             id = btn.attr('id'),
@@ -53,9 +89,15 @@ var seqm = {
 
         seqm.curBtn = '#' + id;        
         seqm.intv = setInterval(seqm.turnOff, 1400);
+
+        console.log('seqm.computerTurn: ' + seqm.computerTurn);
         seqm.playTone(num);
 
         btn.addClass('on');
+
+        if (!seqm.computerTurn) {
+            seqm.checkPlayerInput(seqm.curBtn);
+        }
     },
     AddRndInt: function() {
         var min = 1,
@@ -84,6 +126,7 @@ var seqm = {
         } else {
             seqm.i = 0;
             seqm.len = 0;
+            seqm.computerTurn = false;
         }
     },
     endTheGame: function() {
@@ -99,6 +142,8 @@ var seqm = {
         } else {
             seqm.endTheGame();
         }
+
+        console.log('computerTurn: ' + seqm.computerTurn);
     },
     resetGame: function () {
         seqm.i = 0;
@@ -115,7 +160,7 @@ var seqm = {
         var tmp = setInterval(() => {
             $('#feedback').removeClass('show');
             clearInterval(tmp);
-        }, 3000);
+        }, 2000);
 
     },
     startGame: function () { //alert('Ready Player One...');
