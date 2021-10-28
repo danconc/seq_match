@@ -49,6 +49,7 @@ var seqm = {
     soundError: function () {
         var audio = document.getElementById('errorSnd');
         audio.play();
+
         var tmp = setInterval(function () {
             audio.pause();
             seqm.endTheGame();
@@ -66,21 +67,24 @@ var seqm = {
         console.log('len: ' + len + ', idx: ' + idx);
         console.log('id: ' + id + ', toneSeq[]: ' + seqm.toneSeq[idx] + '\n>>MATCH? ' + match + '\nCnt:' + cnt);
 
-        if(!match) {
-            seqm.computerTurn = false;
-            seqm.endGame = true;
-            seqm.soundError();
-        }
+        
 
-        if(cnt === 0) {
-            seqm.computerTurn = true;
-            var tmp = setInterval(function() {
-                clearInterval(tmp);
-                seqm.computerGoes();            
-            }, 3000);
-        } else {
-            seqm.playerIdx += 1;
-        }
+        // if(!match) {
+        //     seqm.computerTurn = false;
+        //     seqm.endGame = true;
+        //     seqm.soundError();
+        // }
+
+        // if(cnt === 0) {
+        //     seqm.computerTurn = true;
+        //     var tmp = setInterval(function() {
+        //         clearInterval(tmp);
+        //         seqm.playerIdx = 0;
+        //         seqm.computerGoes();            
+        //     }, 3000);
+        // } else {
+        //     seqm.playerIdx += 1;
+        // }
     },
     btnClick: function () {
         var btn = $(this),
